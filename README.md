@@ -8,37 +8,46 @@
 - So sánh văn bản chuyển đổi với văn bản gốc
 - Tính toán độ chính xác của quá trình chuyển đổi
 - Giao diện web thân thiện với người dùng
+- Hỗ trợ nhập văn bản trực tiếp hoặc tải lên file âm thanh
+- Trích xuất và so sánh các biến từ template sử dụng AI
+- Hiển thị chi tiết kết quả so sánh với các chỉ số độ chính xác
+- Hỗ trợ nhiều định dạng âm thanh (mp3, wav, ogg, m4a, aac, webm, flac, mpeg, mp4)
 
 ## Quá trình trích xuất giá trị từ template
 
-Ứng dụng sử dụng thuật toán so sánh văn bản thông minh để trích xuất và so sánh các giá trị từ template. Quá trình này bao gồm các bước sau:
+Ứng dụng sử dụng thuật toán so sánh văn bản thông minh và AI để trích xuất và so sánh các giá trị từ template. Quá trình này bao gồm các bước sau:
 
 1. **Tiền xử lý văn bản**:
    - Chuẩn hóa văn bản (chuyển về chữ thường, loại bỏ dấu câu)
    - Tách từ và chuẩn hóa khoảng trắng
    - Xử lý các trường hợp đặc biệt (số, ngày tháng, đơn vị đo lường)
 
-2. **So sánh và trích xuất**:
+2. **Trích xuất giá trị với AI**:
+   - Sử dụng GPT-4 để trích xuất các giá trị từ văn bản dựa trên template
+   - Tính toán độ tin cậy cho mỗi giá trị được trích xuất
+   - Xử lý các trường hợp đặc biệt và ngữ cảnh
+
+3. **So sánh và trích xuất**:
    - Sử dụng thuật toán fuzzy matching để tìm các từ tương đồng
    - Tính toán độ tương đồng giữa các từ (sử dụng thư viện fuzzball)
    - Xác định ngưỡng chấp nhận cho độ tương đồng
    - Trích xuất các giá trị khớp với template
 
-3. **Xử lý các trường hợp đặc biệt**:
+4. **Xử lý các trường hợp đặc biệt**:
    - Xử lý các từ viết tắt
    - Xử lý các từ đồng nghĩa
    - Xử lý các trường hợp viết hoa/viết thường
    - Xử lý các lỗi chính tả thông dụng
 
-4. **Tính toán độ chính xác**:
+5. **Tính toán độ chính xác**:
    - So sánh từng từ giữa văn bản gốc và văn bản chuyển đổi
    - Tính toán tỷ lệ khớp chính xác
    - Đánh dấu các từ khác biệt
    - Hiển thị kết quả với các chỉ số chi tiết
 
-5. **Kết quả trả về**:
+6. **Kết quả trả về**:
    - Văn bản đã được chuẩn hóa
-   - Các giá trị trích xuất được
+   - Các giá trị trích xuất được với độ tin cậy
    - Độ chính xác của quá trình trích xuất
    - Các từ khác biệt được đánh dấu
    - Thống kê chi tiết về kết quả so sánh
@@ -84,7 +93,7 @@ Kết quả trích xuất:
 
 1. Clone repository:
 ```bash
-git clone [repository-url]
+git clone git@github.com:mvtcode/extract-text-ai.git
 cd extract-text-ai
 ```
 
