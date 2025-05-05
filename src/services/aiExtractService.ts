@@ -16,7 +16,7 @@ export async function extractValuesWithAI(
 ): Promise<Record<string, ExtractedValue>> {
   try {
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4-turbo-preview',
+      model: 'gpt-4.1-mini-2025-04-14',
       messages: [
         {
           role: 'system',
@@ -32,10 +32,13 @@ export async function extractValuesWithAI(
         },
         {
           role: 'user',
-          content: `Template: ${template}\nText: ${text}`,
+          content: `Template: \`\`\`${template}\`\`\`\nText: \`\`\`${text}\`\`\``,
         },
       ],
       response_format: { type: 'json_object' },
+      temperature: 0.2,
+      max_tokens: 8000,
+      top_p: 0.1,
     });
 
     const result = JSON.parse(completion.choices[0].message.content || '{}');

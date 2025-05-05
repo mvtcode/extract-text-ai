@@ -25,13 +25,27 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
     cb(null, uniqueSuffix + path.extname(file.originalname));
   },
 });
 
-const fileFilter = (req: Express.Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
-  const allowedTypes = ['audio/mp3', 'audio/wav', 'audio/ogg', 'audio/m4a', 'audio/aac', 'audio/webm', 'audio/flac', 'audio/mpeg', 'audio/mp4'];
+const fileFilter = (
+  req: Express.Request,
+  file: Express.Multer.File,
+  cb: multer.FileFilterCallback
+) => {
+  const allowedTypes = [
+    'audio/mp3',
+    'audio/wav',
+    'audio/ogg',
+    'audio/m4a',
+    'audio/aac',
+    'audio/webm',
+    'audio/flac',
+    'audio/mpeg',
+    'audio/mp4',
+  ];
   if (allowedTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
@@ -39,12 +53,12 @@ const fileFilter = (req: Express.Request, file: Express.Multer.File, cb: multer.
   }
 };
 
-const upload = multer({ 
+const upload = multer({
   storage,
   fileFilter,
   limits: {
     fileSize: 10 * 1024 * 1024, // 10MB
-  }
+  },
 });
 
 // Routes
@@ -65,7 +79,7 @@ app.post('/api/compare', upload.single('audio'), async (req, res) => {
 
       try {
         transcribedTextToUse = await transcribeAudio(req.file.path);
-        
+
         // Clean up uploaded file
         fs.unlink(req.file.path, (err) => {
           if (err) console.error('Error deleting file:', err);
