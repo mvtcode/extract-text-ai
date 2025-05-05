@@ -151,6 +151,10 @@ npm run dev
 - OpenAI Whisper API
 - ESLint & Prettier
 
+## Screenshot
+
+![Screenshot](./screenshot.png)
+
 ## Liên hệ
 
 - **Tác giả**: Mạc Tân
